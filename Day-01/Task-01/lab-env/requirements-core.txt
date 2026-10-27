@@ -1,0 +1,10 @@
+# Tested together on Python 3.13.5 (macOS) in October 2026. Python 3.11 is the course baseline
+# and the app container runs 3.11, but the full learner toolchain on 3.11 has not been run.
+requests==2.34.2
+pandas==3.0.6
+numpy==2.5.3
+scikit-learn==1.9.1
+matplotlib==3.11.2
+joblib==1.6.0
+mlflow==3.17.0
+jupyterlab==4.6.4

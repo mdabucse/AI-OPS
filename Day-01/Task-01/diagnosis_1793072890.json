@@ -1,0 +1,9 @@
+{
+  "signal_changed": "CPU usage",
+  "log_evidence": "The logs showed successful /work requests with HTTP status 200",
+  "diagnosis": "I believe the problem is excessive CPU consumption because CPU usage increased while the error ratio remained at 0% and P95 latency stayed around 95 milliseconds.",
+  "slo_impact": "This does not burn the availability/error budget because the error ratio is 0%. It may affect the latency budget only if the SLO threshold is below 95 milliseconds.",
+  "timestamp": 1793072890,
+  "actual_fault": "cpu",
+  "integrity_hash": "60c02ddb63f2c2172a8319c90f203b9b1492b78848ed403a53432d53e54f7bfb"
+}
