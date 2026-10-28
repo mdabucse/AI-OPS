@@ -1,0 +1,6 @@
+{
+  "diagnosis": "The database connection pool is exhausted, so login requests wait in a queue.",
+  "recommendation": "Increase the simulated database pool size from 20 to 30.",
+  "human_approval": true,
+  "action_taken": "pool size changed to 30"
+}

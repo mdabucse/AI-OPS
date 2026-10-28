@@ -1,0 +1,17 @@
+{
+  "service": "login-service",
+  "baseline": {
+    "p95_latency_seconds": 0.12
+  },
+  "current": {
+    "p95_latency_seconds": 1.35,
+    "db_pool_max": 20,
+    "db_pool_in_use": 20,
+    "db_waiting_requests": 18
+  },
+  "logs": [
+    "login request waiting for database connection",
+    "database connection pool exhausted",
+    "login request completed with status 200"
+  ]
+}
