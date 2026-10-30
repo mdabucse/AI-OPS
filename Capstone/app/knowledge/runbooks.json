@@ -1,0 +1,20 @@
+[
+  {
+    "document_id": "runbook-db-pool-saturation",
+    "title": "Database connection pool saturation runbook",
+    "keywords": ["database", "connection", "pool", "saturation", "waiting", "requests", "latency", "login"],
+    "content": "When active database connections reach the connection pool maximum, new requests wait for a connection and application latency increases. Check pool capacity, active connections, waiting requests, and connection hold time. Increase capacity only after validating database capacity."
+  },
+  {
+    "document_id": "runbook-login-latency",
+    "title": "Login latency investigation runbook",
+    "keywords": ["login", "latency", "p95", "endpoint", "http", "duration"],
+    "content": "Compare login P95 latency with its baseline, inspect successful requests with high duration, and correlate application logs with telemetry using the simulation correlation ID."
+  },
+  {
+    "document_id": "runbook-approval-safety",
+    "title": "Human approval safety runbook",
+    "keywords": ["approval", "human", "remediation", "audit", "decision", "governance"],
+    "content": "A remediation recommendation remains pending until a human approves it. Rejection must leave system state unchanged, and every decision must be recorded in the audit history."
+  }
+]

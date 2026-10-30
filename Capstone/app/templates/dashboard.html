@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AIOps RCA Agent</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">AIOps training</p><h1>RCA Operations Dashboard</h1></div>
+    <form method="post" action="/logout"><span class="muted">Signed in as {{ username }}</span><button class="secondary" type="submit">Log out</button></form>
+  </header>
+  <main class="container">
+    <section class="hero card">
+      <div><h2>Day 2 latency simulator</h2><p class="muted">One click generates telemetry, traces, logs, RCA, and an approval request.</p><p id="pool-state" class="muted">Current database pool: {{ pool_state_label }} · {{ pool_size }} connections</p><p id="login-hint" class="hint">After approval, log out and sign in again to measure the lower login time.</p></div>
+      <div class="button-row"><button id="simulate-button" type="button">Run RCA simulation</button><button id="reset-button" class="secondary" type="button">Reset pool</button></div>
+    </section>
+    <section id="raw-timeline" class="card raw-timeline" hidden>
+      <div class="section-heading"><div><h2>Live execution data</h2><p class="muted">Each API call and raw JSON response appears in order.</p></div></div>
+      <div id="call-stream"></div>
+    </section>
+    <section class="card workflow-step" data-step="traces" hidden>
+      <div class="section-heading"><div><h2>Traces and logs</h2><p id="run-label" class="muted">Run the simulation to load correlated evidence.</p></div><input id="log-filter" placeholder="Filter logs..."></div>
+      <div class="table-wrap"><table><thead><tr><th>Level</th><th>Endpoint</th><th>Status</th><th>Duration</th><th>Message</th></tr></thead><tbody id="logs-body"><tr><td colspan="5" class="muted">No traces loaded.</td></tr></tbody></table></div>
+    </section>
+    <section class="metrics-grid workflow-step" data-step="metrics" hidden>
+      <div class="metric card"><span>Login duration</span><strong id="login-duration">{{ login_duration_ms }}</strong><small>milliseconds</small></div>
+      <div class="metric card"><span>Current P95</span><strong id="current-p95">—</strong><small>seconds</small><small id="dynamic-threshold">Dynamic threshold: —</small><small id="threshold-status">Status: —</small></div>
+      <div class="metric card"><span>Baseline P95</span><strong id="baseline-p95">—</strong><small>seconds</small></div>
+      <div class="metric card"><span>Pool capacity</span><strong id="pool-status">—</strong><small>active / maximum connections</small></div>
+      <div class="metric card"><span>Waiting requests</span><strong id="waiting">—</strong><small>requests</small></div>
+      <div class="metric card"><span>Anomaly detection</span><strong id="anomaly-status">—</strong><small id="anomaly-score">Score: —</small></div>
+      <div class="metric card"><span>Alerting</span><strong id="alert-status">—</strong><small id="alert-channel">Channel: —</small></div>
+    </section>
+    <section class="card rca-panel workflow-step" data-step="rca" hidden>
+      <div class="section-heading"><div><h2>Root-cause analysis</h2><p class="muted">Evidence generated from the correlated simulation run.</p></div><span id="remediation-status" class="status-pill">Waiting</span></div>
+      <p id="rca-root-cause" class="muted">Run the simulation to generate an RCA finding.</p><ul id="rca-evidence"><li class="muted">No evidence loaded.</li></ul><p id="rca-recommendation" class="muted"></p><h3>Retrieved runbooks</h3><ul id="rag-sources"><li class="muted">No RAG context loaded.</li></ul>
+    </section>
+    <section class="two-col">
+      <div class="card workflow-step" data-step="approval" hidden><div class="section-heading"><h2>Pending approvals</h2></div><div id="approval-list">{% for approval in approvals %}<article class="approval" data-approval-id="{{ approval.id }}"><p class="muted">Approval {{ approval.id[:8] }}</p><p>{{ approval.requested_action }}</p><button class="approve" data-action="approve">Approve</button><button class="secondary reject" data-action="reject">Reject</button></article>{% else %}<p id="no-approvals" class="muted">No pending approvals.</p>{% endfor %}</div></div>
+      <div class="card workflow-step" data-step="audit" hidden><h2>Current run audit</h2><ul id="audit-list" class="audit-list"><li class="muted">Current-run audit events will appear after the workflow.</li></ul></div>
+    </section>
+    <section class="card workflow-step" data-step="governance" hidden>
+      <div class="section-heading"><div><h2>Governance trace</h2><p class="muted">Model, retrieval, threshold, approval, and actor history.</p></div></div>
+      <ul id="governance-list" class="audit-list"><li class="muted">Governance records will appear after the workflow.</li></ul>
+    </section>
+  </main>
+  <script src="/static/app.js?v=4"></script>
+</body>
+</html>

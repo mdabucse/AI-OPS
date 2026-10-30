@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AIOps RCA Agent - Login</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="centered">
+  <main class="card login-card">
+    <p class="eyebrow">AIOps training</p>
+    <h1>RCA Agent</h1>
+    <p class="muted">Sign in to inspect the Day 2 latency simulation.</p>
+    {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    <form id="login-form" method="post" action="/login">
+      <label>Username<input name="username" autocomplete="username" required></label>
+      <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+      <button id="login-button" type="submit">Sign in</button>
+    </form>
+    <p id="login-timing" class="login-timing" aria-live="polite">Login time: — ms</p>
+    <p class="hint">Training credential: <code>admin / admin</code></p>
+  </main>
+  <script src="/static/login.js"></script>
+</body>
+</html>
